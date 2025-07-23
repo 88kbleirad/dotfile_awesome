@@ -205,8 +205,12 @@ local function worker(user_args)
 			widget:unmute()
 		end
 		local volume_level = string.match(stdout, "(%d?%d?%d)%%") -- (\d?\d?\d)\%)
-		volume_level = string.format("% 3d", volume_level)
-		widget:set_volume_level(volume_level)
+		if volume_level then
+			volume_level = string.format("% 3d", volume_level)
+			widget:set_volume_level(volume_level)
+		else
+			widget:set_volume_level("N/A") -- hoặc một giá trị mặc định
+		end
 	end
 
 	function volume:inc(s)

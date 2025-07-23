@@ -106,7 +106,7 @@ local firefox_button = wibox.widget({
 		margins = 4,
 		widget = wibox.container.margin,
 	},
-	bg = "#85c1dc",
+	bg = "#8caaee",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -128,7 +128,7 @@ local thunar_button = wibox.widget({
 		margins = 4,
 		widget = wibox.container.margin,
 	},
-	bg = "#85c1dc",
+	bg = "#8caaee",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -186,6 +186,24 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
+		layout = {
+			layout = wibox.layout.fixed.horizontal,
+		},
+		widget_template = {
+			{
+				{
+					id = "text_role",
+					widget = wibox.widget.textbox,
+				},
+				margins = 4,
+				widget = wibox.container.margin,
+			},
+			widget = wibox.container.background,
+			shape = gears.shape.rounded_rect,
+			bg = "#1e1e2e",
+			fg = "#cdd6f4",
+			forced_width = 300,
+		},
 	})
 
 	-- Create the wibox
@@ -235,9 +253,9 @@ awful.screen.connect_for_each_screen(function(s)
 							layout = wibox.layout.fixed.horizontal,
 							mytextclock,
 						},
-						bg = "#7dc4e4",
-						fg = "#000000",
-						forced_width = 220,
+						bg = "#8caaee",
+						fg = "#ffffff",
+						forced_width = 235,
 						forced_height = 30,
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
@@ -253,8 +271,8 @@ awful.screen.connect_for_each_screen(function(s)
 							layout = wibox.layout.fixed.horizontal,
 							s.mylayoutbox,
 						},
-						bg = "#7dc4e4",
-						fg = "#000000",
+						bg = "#8caaee",
+						fg = "#ffffff",
 						forced_width = 30,
 						forced_height = 30,
 						shape = gears.shape.rounded_rect,
@@ -272,25 +290,6 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			wibox.widget.systray(),
-
-			{
-				{
-					{
-						mykeyboardlayout,
-						margins = 4, -- khoảng cách bên trong
-						widget = wibox.container.margin,
-					},
-					bg = "#b7bdf8",
-					fg = "#181926",
-					forced_width = 30,
-					forced_height = 30,
-					shape = gears.shape.rounded_rect,
-					widget = wibox.container.background,
-				},
-				margins = 5,
-				widget = wibox.container.margin,
-			},
-			wibox.widget.textbox(" "),
 			{
 				{
 					{
@@ -319,12 +318,12 @@ awful.screen.connect_for_each_screen(function(s)
 							width = 70,
 							step_width = 2,
 							step_spacing = 0,
-							color = "#181926",
+							color = "#ffffff",
 						}),
 						margin = 4,
 						widget = wibox.container.margin,
 					},
-					bg = "#81c8be",
+					bg = "#8caaee",
 					shape = gears.shape.rounded_rect,
 					widget = wibox.container.background,
 				},
@@ -340,7 +339,7 @@ awful.screen.connect_for_each_screen(function(s)
 						widget = wibox.container.margin,
 					},
 
-					bg = "#99d1db",
+					bg = "#8caaee",
 					fg = "#ffffff",
 					shape = gears.shape.rounded_rect,
 					widget = wibox.container.background,
@@ -359,7 +358,7 @@ awful.screen.connect_for_each_screen(function(s)
 					},
 
 					bg = "#8aadf4",
-					fg = "#ffffff",
+					fg = "#f5e0dc",
 					shape = gears.shape.rounded_rect,
 					widget = wibox.container.background,
 				},
@@ -390,7 +389,7 @@ awful.screen.connect_for_each_screen(function(s)
 						widget = wibox.container.margin,
 					},
 
-					bg = "#91d7e3",
+					bg = "#8caaee",
 					fg = "#ffffff",
 					shape = gears.shape.rounded_rect,
 					widget = wibox.container.background,

@@ -4,6 +4,7 @@ local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local gfs = require("gears.filesystem")
 local dpi = require("beautiful").xresources.apply_dpi
+local gears = require("gears")
 
 local HOME = os.getenv("HOME")
 local WIDGET_DIR = HOME .. "/.config/awesome/widgets/"
@@ -26,7 +27,7 @@ local function worker(user_args)
 	local warning_msg_title = args.warning_msg_title or "Huston, we have a problem"
 	local warning_msg_text = args.warning_msg_text or "Battery is dying"
 	local warning_msg_position = args.warning_msg_position or "bottom_right"
-	local warning_msg_icon = args.warning_msg_icon or "I don't know" 
+	local warning_msg_icon = args.warning_msg_icon or "I don't know"
 	local enable_battery_warning = args.enable_battery_warning
 	if enable_battery_warning == nil then
 		enable_battery_warning = true
@@ -68,7 +69,7 @@ local function worker(user_args)
 			notification = naughty.notify({
 				text = stdout,
 				title = "Battery status",
-				icon = path_to_icons .. batteryType .. ".svg",
+				icon = gears.color.recolor_image(path_to_icons .. batteryType .. ".svg", "#ffffff"),
 				icon_size = dpi(16),
 				position = position,
 				timeout = 5,

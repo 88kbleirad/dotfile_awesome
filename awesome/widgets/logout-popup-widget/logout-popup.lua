@@ -60,7 +60,7 @@ local function launch(args)
 	local accent_color = args.accent_color or beautiful.bg_focus
 	local text_color = args.text_color or beautiful.fg_normal
 	local label_color = args.label_color or beautiful.fg_focus
-	local phrases = args.phrases or { "Goodbye!" }
+	local phrases = args.phrases or { "Cam on ban da xai!" }
 	local icon_size = args.icon_size or 40
 	local icon_margin = args.icon_margin or 16
 	local hide_on_leave = args.hide_on_leave or false
@@ -227,7 +227,7 @@ local function widget(args)
 	local res = wibox.widget({
 		{
 			{
-				image = icon,
+				image = gears.color.recolor_image(icon, "#ffffff"),
 				widget = wibox.widget.imagebox,
 			},
 			margins = 4,

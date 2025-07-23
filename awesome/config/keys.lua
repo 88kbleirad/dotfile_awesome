@@ -119,9 +119,12 @@ globalkeys = gears.table.join(
 	--Config logout
 	awful.key({ modkey }, "l", function()
 		logout_popup.launch({
-			bg_color = "#282a36",
-			accent_color = "#ff79c6",
-			phrases = {},
+			bg_color = "#261447",
+			accent_color = "#ff4365",
+			text_color = "#f706cf",
+			icon_size = 40,
+			icon_margin = 16,
+			phrases = { "May co tat di khong!" },
 		})
 	end, { description = "Show logout screen", group = "custom" }),
 	--Volume
