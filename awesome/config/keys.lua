@@ -128,15 +128,15 @@ globalkeys = gears.table.join(
 		})
 	end, { description = "Show logout screen", group = "custom" }),
 	--Volume
-	awful.key({ modkey }, "bracketright", function()
+	awful.key({ modkey }, "→", function()
 		volume_widget:inc(5)
 	end, { description = "increase volume", group = "volume" }),
 
-	awful.key({ modkey }, "bracketleft", function()
+	awful.key({ modkey }, "←", function()
 		volume_widget:dec(5)
 	end, { description = "decrease volume", group = "volume" }),
 
-	awful.key({ modkey }, "backslash", function()
+	awful.key({ modkey }, "0", function()
 		volume_widget:toggle()
 	end, { description = "toggle mute", group = "volume" }),
 
@@ -151,7 +151,23 @@ globalkeys = gears.table.join(
 
 	awful.key({ "Shift" }, "Print", function()
 		awful.spawn("flameshot full -p ~/Pictures")
-	end, { description = "Screen full display", group = "screenshot" })
+	end, { description = "Screen full display", group = "screenshot" }),
+	awful.key({ modkey, "Control" }, "o", function()
+		local t = awful.screen.focused().selected_tag
+		if t then
+			-- Lấy màn hình kế tiếp (vòng tròn)
+			local next_screen = awful.screen.focused():get_next_in_direction("right") or screen.primary
+			t.screen = next_screen
+			t:view_only()
+
+			-- Ẩn tag trên màn hình cũ (tùy chọn)
+			for s in screen do
+				if s ~= t.screen then
+					awful.tag.viewnone(s)
+				end
+			end
+		end
+	end, { description = "move tag to next screen", group = "tag" })
 )
 
 clientkeys = gears.table.join(

@@ -141,12 +141,69 @@ end)
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- Tạo shared tag table toàn cục
+shared_tags = {}
+
+-- Danh sách tên tag
+local tag_names = { "1", "2", "3", "4" }
+
+-- Tạo shared tags, chưa gán màn hình nào
+for i, name in ipairs(tag_names) do
+	shared_tags[i] = awful.tag.add(name, {
+		layout = awful.layout.layouts[1],
+	})
+end
+
+-- Hàm chuyển toàn bộ tag sang màn hình chỉ định
+local function move_all_tags_to_screen(target_screen)
+	for _, tag in ipairs(shared_tags) do
+		tag.screen = target_screen
+	end
+	-- Hiện tag đầu tiên
+	shared_tags[1]:view_only()
+
+	-- Ẩn tag trên các màn hình khác
+	for s in screen do
+		if s ~= target_screen then
+			awful.tag.viewnone(s)
+		end
+	end
+end
+
+-- Khi thêm màn hình (cắm HDMI)
+screen.connect_signal("added", function(s)
+	if screen[2] then
+		move_all_tags_to_screen(screen[2])
+	end
+end)
+
+-- Khi rút màn hình (chỉ còn laptop)
+screen.connect_signal("removed", function(s)
+	if screen[1] then
+		move_all_tags_to_screen(screen[1])
+	end
+end)
+
+-- Khi khởi động (chờ màn hình nhận đủ)
+gears.timer({
+	timeout = 1,
+	autostart = true,
+	single_shot = true,
+	callback = function()
+		if screen[2] then
+			move_all_tags_to_screen(screen[2])
+		else
+			move_all_tags_to_screen(screen[1])
+		end
+	end,
+})
+
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
+	--awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
 
 	s.padding = {
 		top = 5,
@@ -403,4 +460,5 @@ awful.screen.connect_for_each_screen(function(s)
 		t.layout = awful.layout.suit.spiral
 	end
 end)
+-- Khi tag ở screen[1] thay đổi, đổi theo tag screen[2]
 -- }}}
