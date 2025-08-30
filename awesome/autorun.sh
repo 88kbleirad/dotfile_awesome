@@ -1,7 +1,7 @@
 
 #!/bin/zsh
 nitrogen --restore &
-~/.screenlayout/setup_screen.sh &
+~/.screenlayout/setup_screen-vertical.sh &
 picom --config ~/.config/picom/picom.conf &
 
 pgrep -x fcitx5 >/dev/null || fcitx5 &
