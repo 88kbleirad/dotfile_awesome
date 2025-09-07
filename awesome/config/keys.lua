@@ -167,7 +167,16 @@ globalkeys = gears.table.join(
 				end
 			end
 		end
-	end, { description = "move tag to next screen", group = "tag" })
+	end, { description = "move tag to next screen", group = "tag" }),
+	-- Focus screen 1
+	awful.key({ modkey }, "F1", function()
+		awful.screen.focus(1)
+	end, { description = "focus screen 1", group = "screen" }),
+
+	-- Focus screen 2
+	awful.key({ modkey }, "F2", function()
+		awful.screen.focus(2)
+	end, { description = "focus screen 2", group = "screen" })
 )
 
 clientkeys = gears.table.join(

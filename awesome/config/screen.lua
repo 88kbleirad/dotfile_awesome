@@ -176,6 +176,27 @@ obsidian_button:connect_signal("button::press", function()
 	awful.spawn("/home/dariel/Applications/Obsidian-1.9.12.AppImage")
 end)
 
+local virtualbox_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/virtualbox.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	bg = "#8caaee",
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+virtualbox_button:connect_signal("button::press", function()
+	awful.spawn("virtualbox")
+end)
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -404,6 +425,11 @@ awful.screen.connect_for_each_screen(function(s)
 				},
 				{
 					obsidian_button,
+					margins = 5,
+					widget = wibox.container.margin,
+				},
+				{
+					virtualbox_button,
 					margins = 5,
 					widget = wibox.container.margin,
 				},

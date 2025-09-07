@@ -96,4 +96,41 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
+
+-- Khi chuyển sang màn hình khác
+
+local handling_screen_change = false
+
+client.connect_signal("property::screen", function(c)
+	if c.class ~= "Alacritty" then
+		return
+	end
+	if handling_screen_change then
+		return
+	end
+
+	handling_screen_change = true
+
+	local g = c.screen.workarea
+	local margin = 20
+
+	if c.screen.index == 2 then
+		if not c.floating then
+			c.floating = true
+		end
+		c:geometry({
+			x = g.x + margin,
+			y = g.y + margin,
+			width = g.width - margin * 2,
+			height = g.height - margin * 2,
+		})
+	elseif c.screen.index == 1 then
+		if c.floating then
+			c.floating = false
+		end
+	end
+
+	handling_screen_change = false
+end)
+
 -- }}}
