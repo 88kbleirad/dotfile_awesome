@@ -175,7 +175,7 @@ local function worker(user_args)
 			batteryType = string.format(batteryType, "")
 		end
 
-		widget.icon:set_image(path_to_icons .. batteryType .. ".svg")
+		widget.icon:set_image(path_to_icons .. batteryType .. ".svg", "#1e1e2e")
 
 		-- Update popup text
 		-- battery_popup.text = string.gsub(stdout, "\n$", "")

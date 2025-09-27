@@ -59,11 +59,11 @@ local function worker(user_args)
 			widget = wibox.widget.textbox,
 		},
 		{
-			image = gears.color.recolor_image(ICONS_DIR .. "down.svg", "#ffffff"),
+			image = gears.color.recolor_image(ICONS_DIR .. "down.svg", "#1e1e2e"),
 			widget = wibox.widget.imagebox,
 		},
 		{
-			image = gears.color.recolor_image(ICONS_DIR .. "up.svg", "#ffffff"),
+			image = gears.color.recolor_image(ICONS_DIR .. "up.svg", "#1e1e2e"),
 			widget = wibox.widget.imagebox,
 		},
 		{

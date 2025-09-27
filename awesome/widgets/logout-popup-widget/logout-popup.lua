@@ -227,7 +227,7 @@ local function widget(args)
 	local res = wibox.widget({
 		{
 			{
-				image = gears.color.recolor_image(icon, "#ffffff"),
+				image = gears.color.recolor_image(icon, "#1e1e2e"),
 				widget = wibox.widget.imagebox,
 			},
 			margins = 4,

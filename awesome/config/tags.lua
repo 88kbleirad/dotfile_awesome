@@ -1,0 +1,32 @@
+-- ~/.config/awesome/tags.lua
+-- local rubato = require("lib.rubato")
+-- local awful = require("awful")
+-- local gears = require("gears")
+--
+-- -- Slide khi đổi tag
+-- tag.connect_signal("tag::history::update", function()
+-- 	local t = awful.screen.focused().selected_tag
+-- 	if not t then
+-- 		return
+-- 	end
+--
+-- 	for _, c in ipairs(t:clients()) do
+-- 		if c and c.valid then
+-- 			local original_x = c.x
+-- 			c.x = original_x - 200 -- lệch sang trái 200px
+--
+-- 			local anim = rubato.timed({
+-- 				pos = c.x,
+-- 				duration = 0.4,
+-- 				override_dt = true,
+-- 				subscribed = function(pos)
+-- 					if c and c.valid then
+-- 						c.x = pos
+-- 					end
+-- 				end,
+-- 			})
+--
+-- 			anim.target = original_x
+-- 		end
+-- 	end
+-- end)

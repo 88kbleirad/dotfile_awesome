@@ -176,10 +176,10 @@ obsidian_button:connect_signal("button::press", function()
 	awful.spawn("/home/dariel/Applications/Obsidian-1.9.12.AppImage")
 end)
 
-local virtualbox_button = wibox.widget({
+local protonvpn_button = wibox.widget({
 	{
 		{
-			image = "/home/dariel/.icons/virtualbox.png",
+			image = "/home/dariel/.icons/protonvpn.jpg",
 			resize = true,
 			widget = wibox.widget.imagebox,
 		},
@@ -193,9 +193,30 @@ local virtualbox_button = wibox.widget({
 	widget = wibox.container.background,
 })
 
-virtualbox_button:connect_signal("button::press", function()
-	awful.spawn("virtualbox")
+protonvpn_button:connect_signal("button::press", function()
+	awful.spawn("protonvpn-app")
 end)
+
+-- local virtualbox_button = wibox.widget({
+-- 	{
+-- 		{
+-- 			image = "/home/dariel/.icons/virtualbox.png",
+-- 			resize = true,
+-- 			widget = wibox.widget.imagebox,
+-- 		},
+-- 		margins = 4,
+-- 		widget = wibox.container.margin,
+-- 	},
+-- 	bg = "#8caaee",
+-- 	forced_width = 30,
+-- 	forced_height = 30,
+-- 	shape = gears.shape.rounded_rect,
+-- 	widget = wibox.container.background,
+-- })
+--
+-- virtualbox_button:connect_signal("button::press", function()
+-- 	awful.spawn("virtualbox")
+-- end)
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
@@ -429,10 +450,17 @@ awful.screen.connect_for_each_screen(function(s)
 					widget = wibox.container.margin,
 				},
 				{
-					virtualbox_button,
+					protonvpn_button,
 					margins = 5,
 					widget = wibox.container.margin,
 				},
+
+				-- {
+				-- 	virtualbox_button,
+				-- 	margins = 5,
+				-- 	widget = wibox.container.margin,
+				-- },
+
 				s.mypromptbox,
 				s.mytasklist,
 			},
@@ -449,7 +477,7 @@ awful.screen.connect_for_each_screen(function(s)
 								mytextclock,
 							},
 							bg = "#8caaee",
-							fg = "#ffffff",
+							fg = "#1e1e2e",
 							forced_width = 235,
 							forced_height = 30,
 							shape = gears.shape.rounded_rect,
@@ -467,7 +495,7 @@ awful.screen.connect_for_each_screen(function(s)
 								s.mylayoutbox,
 							},
 							bg = "#8caaee",
-							fg = "#ffffff",
+							fg = "#1e1e2e",
 							forced_width = 30,
 							forced_height = 30,
 							shape = gears.shape.rounded_rect,
@@ -495,7 +523,7 @@ awful.screen.connect_for_each_screen(function(s)
 							widget = wibox.container.margin,
 						},
 						bg = "#8caaee",
-						fg = "#181926",
+						fg = "#1e1e2e",
 						forced_width = 30,
 						forced_height = 30,
 						shape = gears.shape.rounded_rect,
@@ -513,7 +541,7 @@ awful.screen.connect_for_each_screen(function(s)
 								width = 70,
 								step_width = 2,
 								step_spacing = 0,
-								color = "#ffffff",
+								color = "#1e1e2e",
 							}),
 							margin = 4,
 							widget = wibox.container.margin,
@@ -535,7 +563,7 @@ awful.screen.connect_for_each_screen(function(s)
 						},
 
 						bg = "#8caaee",
-						fg = "#ffffff",
+						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
@@ -553,7 +581,7 @@ awful.screen.connect_for_each_screen(function(s)
 						},
 
 						bg = "#8aadf4",
-						fg = "#f5e0dc",
+						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
@@ -569,7 +597,7 @@ awful.screen.connect_for_each_screen(function(s)
 						},
 
 						bg = "#8aadf4",
-						fg = "#f5e0dc",
+						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
@@ -585,7 +613,7 @@ awful.screen.connect_for_each_screen(function(s)
 						},
 
 						bg = "#8caaee",
-						fg = "#ffffff",
+						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},

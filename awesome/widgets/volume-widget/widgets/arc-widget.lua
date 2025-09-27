@@ -18,7 +18,7 @@ function widget.get_widget(widgets_args)
 	return wibox.widget({
 		{
 			id = "icon",
-			image = gears.color.recolor_image(ICON_DIR .. "audio-volume-high-symbolic.svg", "#ffffff"),
+			image = gears.color.recolor_image(ICON_DIR .. "audio-volume-high-symbolic.svg", "#1e1e2e"),
 			resize = true,
 			widget = wibox.widget.imagebox,
 		},

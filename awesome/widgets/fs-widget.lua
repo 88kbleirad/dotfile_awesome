@@ -21,7 +21,7 @@ config.widget_width = 40
 config.widget_bar_color = "#aaaaaa"
 config.widget_onclick_bg = "#f5bde6"
 config.widget_border_color = "#535d6c66"
-config.widget_background_color = "#ffffff"
+config.widget_background_color = "#1e1e2e"
 
 -- popup
 config.popup_bg = "#22222233"
