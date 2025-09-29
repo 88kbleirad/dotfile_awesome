@@ -66,3 +66,4 @@ mytextclock:connect_signal("button::press", function(_, _, _, button)
 		cw.toggle()
 	end
 end)
+

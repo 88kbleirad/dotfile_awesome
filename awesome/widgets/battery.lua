@@ -24,7 +24,7 @@ local function worker(user_args)
 	local position = args.notification_position or "top_right"
 	local timeout = args.timeout or 10
 
-	local warning_msg_title = args.warning_msg_title or "Huston, we have a problem"
+	local warning_msg_title = args.warning_msg_title or "Dariel, we have a problem"
 	local warning_msg_text = args.warning_msg_text or "Battery is dying"
 	local warning_msg_position = args.warning_msg_position or "bottom_right"
 	local warning_msg_icon = args.warning_msg_icon or "I don't know"

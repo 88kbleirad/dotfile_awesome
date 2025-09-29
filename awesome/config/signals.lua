@@ -105,29 +105,28 @@ client.connect_signal("property::screen", function(c)
 	if c.class ~= "Alacritty" then
 		return
 	end
+
 	if handling_screen_change then
 		return
 	end
-
 	handling_screen_change = true
 
 	local g = c.screen.workarea
 	local margin = 20
 
 	if c.screen.index == 2 then
-		if not c.floating then
-			c.floating = true
-		end
-		c:geometry({
-			x = g.x + margin,
-			y = g.y + margin,
-			width = g.width - margin * 2,
-			height = g.height - margin * 2,
-		})
+		c.floating = true
+
+		gears.timer.delayed_call(function()
+			c:geometry({
+				x = g.x + margin,
+				y = g.y + margin,
+				width = g.width - margin * 2,
+				height = g.height - margin * 2,
+			})
+		end)
 	elseif c.screen.index == 1 then
-		if c.floating then
-			c.floating = false
-		end
+		c.floating = false
 	end
 
 	handling_screen_change = false

@@ -17,7 +17,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Create a textclock widget
 local mytextclock = wibox.widget({
 	format = " %A %d/%m/%y %H:%M",
-	font = "JetBrainsMono Nerd Font 11",
+	font = "JetBrainsMono Nerd Font 13",
 	align = "center",
 	widget = wibox.widget.textclock,
 })
@@ -79,7 +79,7 @@ local tasklist_buttons = gears.table.join(
 --
 
 local function set_wallpaper(s)
-	local wp = "/home/dariel/Pictures/firefly-bg.jpg"
+	local wp = "/home/dariel/Pictures/catpuccin.jpg"
 	gears.wallpaper.maximized(wp, s, true)
 end
 
@@ -119,10 +119,10 @@ local firefox_icon = wibox.widget({
 local firefox_button = wibox.widget({
 	{
 		firefox_icon,
-		margins = 4,
+		margins = 7,
 		widget = wibox.container.margin,
 	},
-	bg = "#8caaee",
+	bg = "#1e1e2e",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -141,10 +141,10 @@ local thunar_button = wibox.widget({
 			resize = true,
 			widget = wibox.widget.imagebox,
 		},
-		margins = 4,
+		margins = 7,
 		widget = wibox.container.margin,
 	},
-	bg = "#8caaee",
+	bg = "#1e1e2e",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -162,10 +162,10 @@ local obsidian_button = wibox.widget({
 			resize = true,
 			widget = wibox.widget.imagebox,
 		},
-		margins = 4,
+		margins = 7,
 		widget = wibox.container.margin,
 	},
-	bg = "#8caaee",
+	bg = "#1e1e2e",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -176,26 +176,26 @@ obsidian_button:connect_signal("button::press", function()
 	awful.spawn("/home/dariel/Applications/Obsidian-1.9.12.AppImage")
 end)
 
-local protonvpn_button = wibox.widget({
-	{
-		{
-			image = "/home/dariel/.icons/protonvpn.jpg",
-			resize = true,
-			widget = wibox.widget.imagebox,
-		},
-		margins = 4,
-		widget = wibox.container.margin,
-	},
-	bg = "#8caaee",
-	forced_width = 30,
-	forced_height = 30,
-	shape = gears.shape.rounded_rect,
-	widget = wibox.container.background,
-})
-
-protonvpn_button:connect_signal("button::press", function()
-	awful.spawn("protonvpn-app")
-end)
+-- local protonvpn_button = wibox.widget({
+-- 	{
+-- 		{
+-- 			image = "/home/dariel/.icons/protonvpn.jpg",
+-- 			resize = true,
+-- 			widget = wibox.widget.imagebox,
+-- 		},
+-- 		margins = 4,
+-- 		widget = wibox.container.margin,
+-- 	},
+-- 	bg = "#8caaee",
+-- 	forced_width = 30,
+-- 	forced_height = 30,
+-- 	shape = gears.shape.rounded_rect,
+-- 	widget = wibox.container.background,
+-- })
+--
+-- protonvpn_button:connect_signal("button::press", function()
+-- 	awful.spawn("protonvpn-app")
+-- end)
 
 -- local virtualbox_button = wibox.widget({
 -- 	{
@@ -385,7 +385,7 @@ awful.screen.connect_for_each_screen(function(s)
 					id = "text_role",
 					widget = wibox.widget.textbox,
 				},
-				margins = 4,
+				margins = 7,
 				widget = wibox.container.margin,
 			},
 			widget = wibox.container.background,
@@ -421,9 +421,9 @@ awful.screen.connect_for_each_screen(function(s)
 			bg = "#1e1e2e",
 			fg = "#cdd6f4",
 			border_width = 2,
-			border_color = "#89b4fa",
+			border_color = "#1e1e2e",
 			shape = function(cr, width, height)
-				gears.shape.rounded_rect(cr, width, height, 15)
+				gears.shape.rounded_rect(cr, width, height, 25)
 			end,
 		})
 
@@ -449,11 +449,11 @@ awful.screen.connect_for_each_screen(function(s)
 					margins = 5,
 					widget = wibox.container.margin,
 				},
-				{
-					protonvpn_button,
-					margins = 5,
-					widget = wibox.container.margin,
-				},
+				-- {
+				-- 	protonvpn_button,
+				-- 	margins = 5,
+				-- 	widget = wibox.container.margin,
+				-- },
 
 				-- {
 				-- 	virtualbox_button,
@@ -476,8 +476,8 @@ awful.screen.connect_for_each_screen(function(s)
 								layout = wibox.layout.fixed.horizontal,
 								mytextclock,
 							},
-							bg = "#8caaee",
-							fg = "#1e1e2e",
+							bg = "#1e1e2e",
+							fg = "#cdd6f4",
 							forced_width = 235,
 							forced_height = 30,
 							shape = gears.shape.rounded_rect,
@@ -494,14 +494,14 @@ awful.screen.connect_for_each_screen(function(s)
 								layout = wibox.layout.fixed.horizontal,
 								s.mylayoutbox,
 							},
-							bg = "#8caaee",
-							fg = "#1e1e2e",
-							forced_width = 30,
-							forced_height = 30,
+							bg = "#1e1e2e",
+							fg = "#cdd6f4",
+							forced_width = 20,
+							forced_height = 20,
 							shape = gears.shape.rounded_rect,
 							widget = wibox.container.background,
 						},
-						margins = 1,
+						margins = 7,
 						widget = wibox.container.margin,
 					},
 				},
@@ -512,24 +512,38 @@ awful.screen.connect_for_each_screen(function(s)
 
 			{ -- Right widgets
 				layout = wibox.layout.fixed.horizontal,
-				wibox.widget.systray(),
+				{
+					{
+						{
+							wibox.widget.systray(),
+							margin = 3,
+							widget = wibox.container.margin,
+						},
+						forced_width = 70,
+						forced_height = 70,
+						shape = gears.shape.rounded_rect,
+						widget = wibox.container.background,
+					},
+					margins = 5,
+					widget = wibox.container.margin,
+				},
 				{
 					{
 						{
 							volume_widget({
 								widget_type = "arc",
 							}),
-							margin = 4,
+							margin = 5,
 							widget = wibox.container.margin,
 						},
-						bg = "#8caaee",
+						bg = "#cdd6f4",
 						fg = "#1e1e2e",
-						forced_width = 30,
-						forced_height = 30,
+						forced_width = 25,
+						forced_height = 25,
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 7,
 					widget = wibox.container.margin,
 				},
 				wibox.widget.textbox(" "),
@@ -541,16 +555,16 @@ awful.screen.connect_for_each_screen(function(s)
 								width = 70,
 								step_width = 2,
 								step_spacing = 0,
-								color = "#1e1e2e",
+								color = "#cdd6f4",
 							}),
 							margin = 4,
 							widget = wibox.container.margin,
 						},
-						bg = "#8caaee",
+						bg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 7,
 					widget = wibox.container.margin,
 				},
 				wibox.widget.textbox(" "),
@@ -558,16 +572,16 @@ awful.screen.connect_for_each_screen(function(s)
 					{
 						{
 							fs_widget(),
-							margin = 4,
+							margin = 3,
 							widget = wibox.container.margin,
 						},
 
-						bg = "#8caaee",
+						bg = "#cdd6f4",
 						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 7,
 					widget = wibox.container.margin,
 				},
 				wibox.widget.textbox("   "),
@@ -580,12 +594,12 @@ awful.screen.connect_for_each_screen(function(s)
 							widget = wibox.container.margin,
 						},
 
-						bg = "#8aadf4",
+						bg = "#cdd6f4",
 						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 7,
 					widget = wibox.container.margin,
 				},
 				{
@@ -596,12 +610,12 @@ awful.screen.connect_for_each_screen(function(s)
 							widget = wibox.container.margin,
 						},
 
-						bg = "#8aadf4",
-						fg = "#1e1e2e",
+						bg = "#1e1e2e",
+						fg = "#ffffff",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 7,
 					widget = wibox.container.margin,
 				},
 				{
@@ -612,12 +626,12 @@ awful.screen.connect_for_each_screen(function(s)
 							widget = wibox.container.margin,
 						},
 
-						bg = "#8caaee",
+						bg = "#cdd6f4",
 						fg = "#1e1e2e",
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 7,
 					widget = wibox.container.margin,
 				},
 			},

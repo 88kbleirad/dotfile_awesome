@@ -74,8 +74,8 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/init.lua")
 require("autostart.apps")
 
 -- Sort keybinding
-root.keys(require("config.keys"))
-root.buttons(require("config.mouse"))
+require("config.keys")
+require("config.mouse")
 
 -- Config tags (workspace)
 require("config.tags")
