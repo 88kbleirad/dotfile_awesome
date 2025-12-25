@@ -15,3 +15,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
+
+naughty.config.padding = 15
+naughty.config.spacing = 4
+naughty.config.defaults.position = "top_right"

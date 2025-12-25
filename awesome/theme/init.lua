@@ -1,14 +1,16 @@
 local theme = {}
 
-theme.useless_gap = 7
+theme.useless_gap = 4
 local gfs = require("gears.filesystem")
+local gears = require("gears")
 local themes_path = gfs.get_themes_dir()
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local beautiful = require("beautiful")
 
-theme.font = "JetBrainsMono Nerd Font 14"
+theme.font = "MapleMono NF CN 14"
 
 -- Màu nền & chữ
 theme.bg_normal = "#222222"
@@ -47,5 +49,19 @@ theme.layout_cornernw = themes_path .. "default/layouts/cornernww.png"
 theme.layout_cornerne = themes_path .. "default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path .. "default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path .. "default/layouts/cornersew.png"
+
+-- Notifications (theme variables)
+theme.notification_font = "MapleMono NF CN 12"
+theme.notification_bg = "#1e1e2e"
+theme.notification_fg = "#cdd6f4"
+theme.notification_border_width = 1
+theme.notification_border_color = "#45475a"
+theme.notification_opacity = 0.95
+theme.notification_icon_size = 32
+theme.notification_shape = function(cr, w, h)
+	gears.shape.rounded_rect(cr, w, h, 12)
+end
+theme.notification_max_width = 420
+theme.notification_max_height = 300
 
 return theme

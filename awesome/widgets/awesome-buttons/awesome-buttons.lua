@@ -7,9 +7,10 @@ buttons.with_icon = function(args)
 	local type = args.type or "basic"
 	local color = args.color or "#D8DEE9"
 	local icon = args.icon or "help-circle"
-	local shape = args.shape or "circle"
-	local icon_size = args.icon_size or 20
+	local shape = args.shape or "rounded_rect"
+	local icon_size = args.icon_size or 15
 	local icon_margin = args.icon_margin or 4
+	local font = args.font or "MapleMono NF CN"
 	local onclick = args.onclick or function() end
 
 	if icon:sub(1, 1) ~= "/" then
@@ -19,7 +20,7 @@ buttons.with_icon = function(args)
 	local result = wibox.widget({
 		{
 			{
-				image = icon,
+				image = gears.color.recolor_image(icon, "#cdd6f4"),
 				resize = true,
 				forced_height = icon_size,
 				forced_width = icon_size,
@@ -62,7 +63,7 @@ buttons.with_icon = function(args)
 	end)
 	result:connect_signal("mouse::leave", function(c)
 		if type ~= "flat" then
-			c:set_bg("#00000000")
+			c:set_bg("#1e1e2e")
 		end
 		if old_wibox then
 			old_wibox.cursor = old_cursor

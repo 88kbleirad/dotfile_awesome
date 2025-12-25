@@ -2,13 +2,13 @@
 # Font
 font:
   normal:
-    family: "JetBrainsMono Nerd Font"
+    family: "MapleMono NF CN"
     style: Regular
   bold:
-    family: "JetBrainsMono Nerd Font"
+    family: "MapleMono NF CN"
     style: Bold
   italic:
-    family: "JetBrainsMono Nerd Font"
+    family: "MapleMono NF CN"
     style: Italic
   size: 8
 

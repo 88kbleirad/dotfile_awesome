@@ -37,15 +37,15 @@ LANG = "en_US.UTF-8"
 size = 8
 
 [font.bold]
-family = "JetBrainsMono Nerd Font"
+family = "MapleMono NF CN"
 style = "Bold"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font"
+family = "MapleMono NF CN"
 style = "Italic"
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "MapleMono NF CN"
 style = "Regular"
 
 [terminal.shell]

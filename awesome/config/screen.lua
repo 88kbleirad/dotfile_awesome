@@ -17,7 +17,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Create a textclock widget
 local mytextclock = wibox.widget({
 	format = " %A %d/%m/%y %H:%M",
-	font = "JetBrainsMono Nerd Font 13",
+	font = "MapleMono NF CN 10",
 	align = "center",
 	widget = wibox.widget.textclock,
 })
@@ -79,7 +79,7 @@ local tasklist_buttons = gears.table.join(
 --
 
 local function set_wallpaper(s)
-	local wp = "/home/dariel/Pictures/catpuccin.jpg"
+	local wp = "/home/dariel/Pictures/AIEnhancer_Background Rimuru.png"
 	gears.wallpaper.maximized(wp, s, true)
 end
 
@@ -119,10 +119,9 @@ local firefox_icon = wibox.widget({
 local firefox_button = wibox.widget({
 	{
 		firefox_icon,
-		margins = 7,
+		margins = 4,
 		widget = wibox.container.margin,
 	},
-	bg = "#1e1e2e",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -141,10 +140,9 @@ local thunar_button = wibox.widget({
 			resize = true,
 			widget = wibox.widget.imagebox,
 		},
-		margins = 7,
+		margins = 4,
 		widget = wibox.container.margin,
 	},
-	bg = "#1e1e2e",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -162,10 +160,9 @@ local obsidian_button = wibox.widget({
 			resize = true,
 			widget = wibox.widget.imagebox,
 		},
-		margins = 7,
+		margins = 4,
 		widget = wibox.container.margin,
 	},
-	bg = "#1e1e2e",
 	forced_width = 30,
 	forced_height = 30,
 	shape = gears.shape.rounded_rect,
@@ -173,29 +170,206 @@ local obsidian_button = wibox.widget({
 })
 
 obsidian_button:connect_signal("button::press", function()
-	awful.spawn("/home/dariel/Applications/Obsidian-1.9.12.AppImage")
+	awful.spawn("/hme/dariel/Applications/Obsidian-1.9.12.AppImage")
 end)
 
--- local protonvpn_button = wibox.widget({
+local libreoffice_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/libreoffice.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+libreoffice_button:connect_signal("button::press", function()
+	awful.spawn("libreoffice")
+end)
+
+-- local intellij_button = wibox.widget({
 -- 	{
 -- 		{
--- 			image = "/home/dariel/.icons/protonvpn.jpg",
+-- 			image = "/home/dariel/.icons/intellij-idea.png",
 -- 			resize = true,
 -- 			widget = wibox.widget.imagebox,
 -- 		},
--- 		margins = 4,
+-- 		margins = 7,
 -- 		widget = wibox.container.margin,
 -- 	},
--- 	bg = "#8caaee",
+-- 	bg = "#1e1e2e",
 -- 	forced_width = 30,
 -- 	forced_height = 30,
 -- 	shape = gears.shape.rounded_rect,
 -- 	widget = wibox.container.background,
 -- })
 --
--- protonvpn_button:connect_signal("button::press", function()
--- 	awful.spawn("protonvpn-app")
+-- intellij_button:connect_signal("button::press", function()
+-- 	awful.spawn("intellij-idea-community")
 -- end)
+
+local protonvpn_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/protonvpn.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+protonvpn_button:connect_signal("button::press", function()
+	awful.spawn("protonvpn-app")
+end)
+
+local packettracer_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/packettracer.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+packettracer_button:connect_signal("button::press", function()
+	awful.spawn("packettracer")
+end)
+
+local anki_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/anki.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+anki_button:connect_signal("button::press", function()
+	awful.spawn("/home/dariel/anki-launcher-25.09-linux/anki")
+end)
+
+local wireshark_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/wireshark.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+wireshark_button:connect_signal("button::press", function()
+	awful.spawn("wireshark")
+end)
+
+local discord_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/discord2.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+discord_button:connect_signal("button::press", function()
+	awful.spawn("legcord")
+end)
+
+-- local vscode_button = wibox.widget({
+-- 	{
+-- 		{
+-- 			image = "/home/dariel/.icons/vscode.png",
+-- 			resize = true,
+-- 			widget = wibox.widget.imagebox,
+-- 		},
+-- 		margins = 7,
+-- 		widget = wibox.container.margin,
+-- 	},
+-- 	bg = "#1e1e2e",
+-- 	forced_width = 30,
+-- 	forced_height = 30,
+-- 	shape = gears.shape.rounded_rect,
+-- 	widget = wibox.container.background,
+-- })
+--
+-- vscode_button:connect_signal("button::press", function()
+-- 	awful.spawn("code")
+-- end)
+
+local truykich_button = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/BattleStrike.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+
+truykich_button:connect_signal("button::press", function()
+	awful.spawn.with_shell([[
+        cd '/home/dariel/.wine/drive_c/Program Files (x86)/VTCMobile/TruyKich/' &&
+        env \
+        GTK_IM_MODULE=none \
+        QT_IM_MODULE=none \
+        XMODIFIERS="@im=none" \
+        WINEDEBUG=-all \
+        STAGING_SHARED_MEMORY=1 \
+        DXVK_ASYNC=1 \
+        __GL_THREADED_OPTIMIZATIONS=1 \
+        MESA_GLTHREAD=true \
+        DXVK_HUD=0 \
+        vblank_mode=0 \
+        nice -n -10 \
+        gamemoderun \
+        wine WDlauncher.exe
+    ]])
+end)
 
 -- local virtualbox_button = wibox.widget({
 -- 	{
@@ -283,7 +457,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 shared_tags = {}
 
 -- Danh sách tên tag
-local tag_names = { "1", "2", "3", "4" }
+local tag_names = { "1", "2", "3", "4", "5", "6" }
 
 -- Tạo shared tags, gán hết về màn laptop (screen[1])
 for i, name in ipairs(tag_names) do
@@ -331,6 +505,129 @@ gears.timer({
 		move_tags_to_laptop()
 	end,
 })
+
+local my_text_btn = wibox.widget({
+	{
+		{
+			image = "/home/dariel/.icons/awesomeWM.png",
+			resize = true,
+			widget = wibox.widget.imagebox,
+			bg = "#cdd6e4",
+		},
+		margins = 4,
+		widget = wibox.container.margin,
+	},
+	forced_width = 30,
+	forced_height = 30,
+	shape = gears.shape.rounded_rect,
+	widget = wibox.container.background,
+})
+beautiful.menu_font = "Maple Mono NF CN 14"
+beautiful.menu_height = 64
+beautiful.menu_width = 360
+beautiful.menu_bg_focus = "#cdd6e4"
+beautiful.menu_fg_normal = "#cdd6e4"
+beautiful.menu_fg_focus = "#1e1e2e"
+beautiful.menu_bg_normal = "#1e1e2e"
+-- Menu dropdown
+local gap = utf8.char(0x2002) .. utf8.char(0x2002)
+local app_menu = awful.menu({
+	items = {
+		{
+			gap .. "Firefox",
+			function()
+				awful.spawn("firefox")
+			end,
+			"/usr/share/icons/hicolor/48x48/apps/firefox.png",
+		},
+		{
+			gap .. "Thunar",
+			function()
+				awful.spawn("thunar")
+			end,
+			"/usr/share/icons/hicolor/48x48/apps/org.xfce.thunar.png",
+		},
+		{
+			gap .. "Obsidian",
+			function()
+				awful.spawn("/home/dariel/Applications/Obsidian-1.9.12.AppImage")
+			end,
+			"/home/dariel/.icons/icons8-obsidian-48.png",
+		},
+		{
+			gap .. "Libreoffice",
+			function()
+				awful.spawn("libreoffice")
+			end,
+			"/home/dariel/.icons/libreoffice.png",
+		},
+		{
+			gap .. "Discord",
+			function()
+				awful.spawn("legcord")
+			end,
+			"/home/dariel/.icons/discord2.png",
+		},
+		{
+			gap .. "Proton VPN",
+			function()
+				awful.spawn("protonvpn-app")
+			end,
+			"/home/dariel/.icons/protonvpn.png",
+		},
+		{
+			gap .. "Cisco Packet Tracer",
+			function()
+				awful.spawn("packettracer")
+			end,
+			"/home/dariel/.icons/packettracer.png",
+		},
+		{
+			gap .. "Anki",
+			function()
+				awful.spawn("/home/dariel/anki-launcher-25.09-linux/anki")
+			end,
+			"/home/dariel/.icons/anki.png",
+		},
+		{
+			gap .. "Wireshark",
+			function()
+				awful.spawn("wireshark")
+			end,
+			"/home/dariel/.icons/wireshark.png",
+		},
+		{
+			gap .. "Blood Strike",
+			function()
+				awful.spawn.with_shell([[
+        cd '/home/dariel/.wine/drive_c/Program Files (x86)/VTCMobile/TruyKich/' &&
+        env \
+        GTK_IM_MODULE=none \
+        QT_IM_MODULE=none \
+        XMODIFIERS="@im=none" \
+        WINEDEBUG=-all \
+        STAGING_SHARED_MEMORY=1 \
+        DXVK_ASYNC=1 \
+        __GL_THREADED_OPTIMIZATIONS=1 \
+        MESA_GLTHREAD=true \
+        DXVK_HUD=0 \
+        vblank_mode=0 \
+        nice -n -10 \
+        gamemoderun \
+        PULSE_LATENCY_MSEC=60 \
+        wine WDlauncher.exe 
+    ]])
+			end,
+			"/home/dariel/.icons/BattleStrike.png",
+		},
+	},
+})
+
+-- Click vào text để toggle menu
+my_text_btn:buttons(gears.table.join(awful.button({}, 1, function()
+	app_menu:toggle({ coords = { x = 15, y = 55 } })
+end)))
+
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	set_wallpaper(s)
@@ -364,35 +661,56 @@ awful.screen.connect_for_each_screen(function(s)
 			awful.layout.inc(-1)
 		end)
 	))
-	-- Create a taglist widget
-	s.mytaglist = awful.widget.taglist({
-		screen = s,
-		filter = awful.widget.taglist.filter.all,
-		buttons = taglist_buttons,
-	})
-
-	-- Create a tasklist widget
+	-- -- Create a taglist widget
+	-- s.mytaglist = awful.widget.taglist({
+	-- 	screen = s,
+	-- 	filter = awful.widget.taglist.filter.all,
+	-- 	buttons = taglist_buttons,
+	-- })
+	--
+	-- -- Create a tasklist widget
+	-- s.mytasklist = awful.widget.tasklist({
+	-- 	screen = s,
+	-- 	filter = awful.widget.tasklist.filter.currenttags,
+	-- 	buttons = tasklist_buttons,
+	-- 	layout = {
+	-- 		layout = wibox.layout.fixed.horizontal,
+	-- 	},
+	-- 	widget_template = {
+	-- 		{
+	-- 			{
+	-- 				id = "text_role",
+	-- 				widget = wibox.widget.textbox,
+	-- 			},
+	-- 			margins = 7,
+	-- 			widget = wibox.container.margin,
+	-- 		},
+	-- 		widget = wibox.container.background,
+	-- 		shape = gears.shape.rounded_rect,
+	-- 		bg = "#1e1e2e",
+	-- 		fg = "#cdd6f4",
+	-- 		forced_width = 300,
+	-- 	},
+	-- })
+	--
 	s.mytasklist = awful.widget.tasklist({
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
-		layout = {
-			layout = wibox.layout.fixed.horizontal,
-		},
 		widget_template = {
 			{
 				{
-					id = "text_role",
-					widget = wibox.widget.textbox,
+					id = "clienticon",
+					widget = awful.widget.clienticon,
 				},
-				margins = 7,
+				margins = 5,
 				widget = wibox.container.margin,
 			},
-			widget = wibox.container.background,
-			shape = gears.shape.rounded_rect,
-			bg = "#1e1e2e",
-			fg = "#cdd6f4",
-			forced_width = 300,
+			nil,
+			create_callback = function(self, c, index, objects) --luacheck: no unused args
+				self:get_children_by_id("clienticon")[1].client = c
+			end,
+			layout = wibox.layout.align.vertical,
 		},
 	})
 
@@ -416,16 +734,21 @@ awful.screen.connect_for_each_screen(function(s)
 		s.mywibox = awful.wibar({
 			position = "top",
 			screen = s,
-			width = 1860,
+			width = 1900,
 			height = 40,
 			bg = "#1e1e2e",
 			fg = "#cdd6f4",
+			ontop = false,
+			--[[ 	type = "dock", ]]
 			border_width = 2,
-			border_color = "#1e1e2e",
+			stretch = false,
 			shape = function(cr, width, height)
-				gears.shape.rounded_rect(cr, width, height, 25)
+				gears.shape.rounded_rect(cr, width, height, 15)
 			end,
 		})
+
+		awful.placement.top(s.mywibox, { margins = { top = 7 } })
+		--[[ 	awful.screen.padding(s, { top = 2 }) ]]
 
 		-- Add widgets to the wibox
 		s.mywibox:setup({
@@ -433,39 +756,18 @@ awful.screen.connect_for_each_screen(function(s)
 			{ -- Left widgets
 				layout = wibox.layout.fixed.horizontal,
 				mylauncher,
-				s.mytaglist,
+				--[[ 	s.mytaglist, ]]
 				{
-					firefox_button,
+					{
+						my_text_btn,
+						bg = "#cdd6e4",
+						shape = gears.shape.rounded_rect,
+						widget = wibox.container.background,
+					},
 					margins = 5,
 					widget = wibox.container.margin,
 				},
-				{
-					thunar_button,
-					margins = 5,
-					widget = wibox.container.margin,
-				},
-				{
-					obsidian_button,
-					margins = 5,
-					widget = wibox.container.margin,
-				},
-				-- {
-				-- 	protonvpn_button,
-				-- 	margins = 5,
-				-- 	widget = wibox.container.margin,
-				-- },
-
-				-- {
-				-- 	virtualbox_button,
-				-- 	margins = 5,
-				-- 	widget = wibox.container.margin,
-				-- },
-
-				s.mypromptbox,
 				s.mytasklist,
-			},
-			-- Middle widget
-			{
 				{
 					layout = wibox.layout.fixed.horizontal,
 					spacing = 6,
@@ -476,17 +778,16 @@ awful.screen.connect_for_each_screen(function(s)
 								layout = wibox.layout.fixed.horizontal,
 								mytextclock,
 							},
-							bg = "#1e1e2e",
-							fg = "#cdd6f4",
-							forced_width = 235,
-							forced_height = 30,
+							bg = "#cdd6f4",
+							fg = "#1e1e2e",
+							forced_width = 200,
+							forced_height = 25,
 							shape = gears.shape.rounded_rect,
 							widget = wibox.container.background,
 						},
-						margins = 1,
+						margins = 7,
 						widget = wibox.container.margin,
 					},
-
 					-- Layoutbox block
 					{
 						{
@@ -495,8 +796,7 @@ awful.screen.connect_for_each_screen(function(s)
 								s.mylayoutbox,
 							},
 							bg = "#1e1e2e",
-							fg = "#cdd6f4",
-							forced_width = 20,
+							forced_width = 30,
 							forced_height = 20,
 							shape = gears.shape.rounded_rect,
 							widget = wibox.container.background,
@@ -505,9 +805,39 @@ awful.screen.connect_for_each_screen(function(s)
 						widget = wibox.container.margin,
 					},
 				},
+
+				-- {
+				-- 	{
+				--
+				-- 		{
+				-- 			layout = wibox.layout.fixed.horizontal,
+				-- 			firefox_button,
+				-- 			thunar_button,
+				-- 			obsidian_button,
+				-- 			libreoffice_button,
+				-- 			discord_button,
+				-- 			protonvpn_button,
+				-- 			packettracer_button,
+				-- 			anki_button,
+				-- 			wireshark_button,
+				-- 			truykich_button,
+				-- 			margin = 2,
+				-- 			widget = wibox.container.margin,
+				-- 		},
+				-- 		bg = "#cdd6e4",
+				-- 		shape = gears.shape.rounded_rect,
+				-- 		widget = wibox.container.background,
+				-- 	},
+				-- 	margins = 7,
+				-- 	widget = wibox.container.margin,
+				-- },
+				s.mypromptbox,
+			},
+			-- Middle widgets (sẽ luôn ở giữa)
+			{
+				widget = wibox.container.place, -- Bọc trong place container
 				halign = "center",
 				valign = "center",
-				widget = wibox.container.place,
 			},
 
 			{ -- Right widgets
@@ -516,15 +846,18 @@ awful.screen.connect_for_each_screen(function(s)
 					{
 						{
 							wibox.widget.systray(),
-							margin = 3,
+							strategy = "exact", -- không scale icons
+							margins = 6,
 							widget = wibox.container.margin,
 						},
-						forced_width = 70,
-						forced_height = 70,
-						shape = gears.shape.rounded_rect,
+						forced_height = 42,
+						bg = "#1e1e2e",
+						shape = function(cr, w, h)
+							gears.shape.rounded_rect(cr, w, h, 10)
+						end,
 						widget = wibox.container.background,
 					},
-					margins = 5,
+					margins = 2,
 					widget = wibox.container.margin,
 				},
 				{
@@ -826,7 +1159,7 @@ awful.screen.connect_for_each_screen(function(s)
 	-- 	},
 	-- })
 	for _, t in pairs(s.tags) do
-		t.layout = awful.layout.suit.spiral
+		t.layout = awful.layout.suit.tile
 	end
 end)
 -- Khi tag ở screen[1] thay đổi, đổi theo tag screen[2]

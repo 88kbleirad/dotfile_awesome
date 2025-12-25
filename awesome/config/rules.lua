@@ -83,5 +83,14 @@ awful.rules.rules = {
 			titlebars_enabled = false,
 		},
 	},
+	{
+		rule_any = { class = { "firefox", "legcord" } },
+		properties = {
+			floating = false,
+		},
+		callback = function(c)
+			awful.titlebar.hide(c)
+		end,
+	},
 }
 -- }}}

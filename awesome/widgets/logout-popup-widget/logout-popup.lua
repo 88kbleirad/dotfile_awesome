@@ -10,10 +10,10 @@ local WIDGET_DIR = HOME_DIR .. "/.config/awesome/widgets/logout-popup-widget"
 
 local w = wibox({
 	bg = beautiful.fg_normal,
-	max_widget_size = 500,
+	max_widget_size = 600,
 	ontop = true,
-	height = 200,
-	width = 400,
+	height = 220,
+	width = 480,
 	shape = function(cr, width, height)
 		gears.shape.rounded_rect(cr, width, height, 8)
 	end,
@@ -29,13 +29,23 @@ local phrase_widget = wibox.widget({
 	widget = wibox.widget.textbox,
 })
 
-local function create_button(icon_name, action_name, accent_color, label_color, onclick, icon_size, icon_margin)
+local function create_button(
+	icon_name,
+	action_name,
+	accent_color,
+	label_color,
+	onclick,
+	icon_size,
+	icon_margin,
+	font_name
+)
 	local button = awesomebuttons.with_icon({
 		type = "basic",
 		icon = icon_name,
 		color = accent_color,
 		icon_size = icon_size,
 		icon_margin = icon_margin,
+		font = font_name,
 		onclick = function()
 			onclick()
 			w.visible = false
@@ -56,13 +66,13 @@ end
 local function launch(args)
 	args = args or {}
 
-	local bg_color = args.bg_color or beautiful.bg_normal
+	local bg_color = args.bg_color or "#1e1e2e"
 	local accent_color = args.accent_color or beautiful.bg_focus
-	local text_color = args.text_color or beautiful.fg_normal
+	local text_color = args.text_color or "#cdd6f4"
 	local label_color = args.label_color or beautiful.fg_focus
-	local phrases = args.phrases or { "Cam on ban da xai!" }
-	local icon_size = args.icon_size or 40
-	local icon_margin = args.icon_margin or 16
+	local phrases = args.phrases or { "DARIELBIKHUNG" }
+	local icon_size = 70
+	local icon_margin = 2
 	local hide_on_leave = args.hide_on_leave or false
 
 	local onlogout = args.onlogout or function()
@@ -108,15 +118,6 @@ local function launch(args)
 						accent_color,
 						label_color,
 						onlogout,
-						icon_size,
-						icon_margin
-					),
-					create_button(
-						"lock",
-						"Lock (" .. onlock_key .. ")",
-						accent_color,
-						label_color,
-						onlock,
 						icon_size,
 						icon_margin
 					),
@@ -169,6 +170,10 @@ local function launch(args)
 	})
 
 	w.screen = mouse.screen
+	awful.placement.align(w, {
+		position = "top",
+		margins = 60,
+	})
 	w.visible = true
 	if hide_on_leave then
 		w:connect_signal("mouse::leave", function()
@@ -177,8 +182,6 @@ local function launch(args)
 			w.visible = false
 		end)
 	end
-
-	awful.placement.centered(w)
 	capi.keygrabber.run(function(_, key, event)
 		if event == "release" then
 			return

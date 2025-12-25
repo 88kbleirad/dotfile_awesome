@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "Maple Mono";
+  font-family: "Maple Mono NF CN";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-family: "Maple Mono";
+  font-family: "Maple Mono NF CN";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -17,7 +17,7 @@
 }
 :root {
   /* APP ELEMENTS */
-  --app-bg: url(https://th.wallhaven.cc/small/1p/1p5z71.jpg);
+/*   --app-bg: url(https://th.wallhaven.cc/small/1p/1p5z71.jpg); */
   --app-blur: 6px;
   --app-margin: 24px;
   --app-radius: 10px;
@@ -125,7 +125,7 @@
   /* TEXT COLOR SETTINGS */
   --text-normal: var(--interactive-normal);
   /* FONT */
-  --font-primary: "Maple Mono", "Noto Sans", sans-serif !important;
+  --font-primary: "Maple Mono NF CN", "Noto Sans", sans-serif !important;
 }
 
 @supports (color: color-mix(in lch, red, blue)) {
