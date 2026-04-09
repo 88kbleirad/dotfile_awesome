@@ -2,12 +2,12 @@
 * {
     bg0:    #1e1e2e;   // nền chính
     bg1:    #313244;   // nền phụ
-    bg2:    #45475a;   // nền nhấn
-    bg3:    #89b4fa;   // accent xanh
+    bg2:    #1e1e2e;   // nền nhấn
+    bg3:    #1e1e2e;   // accent xanh
     fg0:    #cdd6f4;   // chữ chính
-    fg1:    #ffffff;   // trắng sáng
-    fg2:    #a6adc8;   // chữ phụ
-    fg3:    #585b70;   // chữ xám
+    fg1:    #1e1e2e;   // trắng sáng
+    fg2:    #cdd6f4;   // chữ phụ
+    fg3:    #cdd6f4;   // chữ xám
 }
 
 @import "template/rounded-template.rasi"

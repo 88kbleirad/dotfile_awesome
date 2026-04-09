@@ -1,6 +1,6 @@
 
 * {
-    font:   "JetBrainsMono Nerd Font 12";
+    font:   "MapleMono NF CN 12";
 
     background-color:   transparent;
     text-color:         @fg0;

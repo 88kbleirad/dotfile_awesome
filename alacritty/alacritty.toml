@@ -34,7 +34,7 @@ text = "#1e1e2e"
 LANG = "en_US.UTF-8"
 
 [font]
-size = 8
+size = 12
 
 [font.bold]
 family = "MapleMono NF CN"

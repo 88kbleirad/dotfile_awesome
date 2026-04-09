@@ -79,7 +79,7 @@ local tasklist_buttons = gears.table.join(
 --
 
 local function set_wallpaper(s)
-	local wp = "/home/dariel/Pictures/AIEnhancer_Background Rimuru.png"
+	local wp = "/home/dariel/Pictures/Personal_Edited.jpg"
 	gears.wallpaper.maximized(wp, s, true)
 end
 
@@ -395,117 +395,6 @@ end)
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
--- -- Tạo shared tag table toàn cục
--- shared_tags = {}
---
--- -- Danh sách tên tag
--- local tag_names = { "1", "2", "3", "4" }
---
--- -- Tạo shared tags, chưa gán màn hình nào
--- for i, name in ipairs(tag_names) do
--- 	shared_tags[i] = awful.tag.add(name, {
--- 		layout = awful.layout.layouts[1],
--- 	})
--- end
---
--- -- Hàm chuyển toàn bộ tag sang màn hình chỉ định
--- local function move_all_tags_to_screen(target_screen)
--- 	for _, tag in ipairs(shared_tags) do
--- 		tag.screen = target_screen
--- 	end
--- 	-- Hiện tag đầu tiên
--- 	shared_tags[1]:view_only()
---
--- 	-- Ẩn tag trên các màn hình khác
--- 	for s in screen do
--- 		if s ~= target_screen then
--- 			awful.tag.viewnone(s)
--- 		end
--- 	end
--- end
---
--- -- Khi thêm màn hình (cắm HDMI)
--- screen.connect_signal("added", function(s)
--- 	if screen[2] then
--- 		move_all_tags_to_screen(screen[2])
--- 	end
--- end)
---
--- -- Khi rút màn hình (chỉ còn laptop)
--- screen.connect_signal("removed", function(s)
--- 	if screen[1] then
--- 		move_all_tags_to_screen(screen[1])
--- 	end
--- end)
---
--- -- Khi khởi động (chờ màn hình nhận đủ)
--- gears.timer({
--- 	timeout = 1,
--- 	autostart = true,
--- 	single_shot = true,
--- 	callback = function()
--- 		if screen[2] then
--- 			move_all_tags_to_screen(screen[2])
--- 		else
--- 			move_all_tags_to_screen(screen[1])
--- 		end
--- 	end,
--- })
---
-
--- Tạo shared tag table toàn cục
-shared_tags = {}
-
--- Danh sách tên tag
-local tag_names = { "1", "2", "3", "4", "5", "6" }
-
--- Tạo shared tags, gán hết về màn laptop (screen[1])
-for i, name in ipairs(tag_names) do
-	shared_tags[i] = awful.tag.add(name, {
-		layout = awful.layout.layouts[1],
-		screen = screen[1],
-	})
-end
-
--- Hàm gom toàn bộ tag về màn laptop
-local function move_tags_to_laptop()
-	for _, tag in ipairs(shared_tags) do
-		tag.screen = screen[1]
-	end
-	shared_tags[1]:view_only()
-
-	-- Ẩn wibar ở màn phụ
-	for s in screen do
-		if s ~= screen[1] and s.mywibar then
-			s.mywibar.visible = false
-		end
-	end
-end
-
--- Khi thêm màn hình (cắm HDMI)
-screen.connect_signal("added", function(s)
-	-- Không tạo wibar cho màn phụ
-	if s.mywibar then
-		s.mywibar.visible = false
-	end
-	move_tags_to_laptop()
-end)
-
--- Khi rút màn hình (chỉ còn laptop)
-screen.connect_signal("removed", function(s)
-	move_tags_to_laptop()
-end)
-
--- Khi khởi động (chờ màn hình nhận đủ)
-gears.timer({
-	timeout = 1,
-	autostart = true,
-	single_shot = true,
-	callback = function()
-		move_tags_to_laptop()
-	end,
-})
-
 local my_text_btn = wibox.widget({
 	{
 		{
@@ -582,6 +471,24 @@ local app_menu = awful.menu({
 			end,
 			"/home/dariel/.icons/packettracer.png",
 		},
+
+		{
+			gap .. "GNS3",
+			function()
+				awful.spawn.with_shell(
+					"zsh -lc 'source ~/.venvs/gns3-311/bin/activate && nohup gns3server >/tmp/gns3server.log 2>&1 &'"
+				)
+				awful.spawn.with_shell("zsh -lc 'source ~/.venvs/gns3-311/bin/activate && gns3'")
+			end,
+			"/home/dariel/.icons/gns3.png",
+		},
+		{
+			gap .. "Virtual Manager",
+			function()
+				awful.spawn.with_shell("virt-manager")
+			end,
+			"/home/dariel/.icons/qemu.png",
+		},
 		{
 			gap .. "Anki",
 			function()
@@ -596,30 +503,6 @@ local app_menu = awful.menu({
 			end,
 			"/home/dariel/.icons/wireshark.png",
 		},
-		{
-			gap .. "Blood Strike",
-			function()
-				awful.spawn.with_shell([[
-        cd '/home/dariel/.wine/drive_c/Program Files (x86)/VTCMobile/TruyKich/' &&
-        env \
-        GTK_IM_MODULE=none \
-        QT_IM_MODULE=none \
-        XMODIFIERS="@im=none" \
-        WINEDEBUG=-all \
-        STAGING_SHARED_MEMORY=1 \
-        DXVK_ASYNC=1 \
-        __GL_THREADED_OPTIMIZATIONS=1 \
-        MESA_GLTHREAD=true \
-        DXVK_HUD=0 \
-        vblank_mode=0 \
-        nice -n -10 \
-        gamemoderun \
-        PULSE_LATENCY_MSEC=60 \
-        wine WDlauncher.exe 
-    ]])
-			end,
-			"/home/dariel/.icons/BattleStrike.png",
-		},
 	},
 })
 
@@ -628,12 +511,57 @@ my_text_btn:buttons(gears.table.join(awful.button({}, 1, function()
 	app_menu:toggle({ coords = { x = 15, y = 55 } })
 end)))
 
+local mouse = mouse
+local function edge_poll_time(s, bar, pos)
+	pos = pos or "top"
+	local threehold = 35
+	bar.visible = false
+	bar.ontop = true
+
+	local t = gears.timer({ timeout = 0.05 })
+	t:connect_signal("timeout", function()
+		local c = mouse.coords()
+		local g = s.geometry
+
+		local inside_screen = (c.x >= g.x and c.x < g.x + g.width and c.y >= g.y and c.y < g.y + g.height)
+		if not inside_screen then
+			if bar.visible then
+				bar.visible = false
+			end
+			return
+		end
+
+		local near = false
+		if pos == "top" then
+			near = (c.y <= g.y + threehold)
+		elseif pos == "bottom" then
+			near = (c.y >= g.y + g.height - threehold)
+		elseif pos == "left" then
+			near = (c.x <= g.x + threehold)
+		elseif pos == "right" then
+			near = (c.x >= g.x + g.width - threehold)
+		end
+
+		if near then
+			if not bar.visible then
+				bar.visible = true
+			end
+		else
+			if bar.visible then
+				bar.visible = false
+			end
+		end
+	end)
+
+	t:start()
+end
+
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	--awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
+	awful.tag({ "1", "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
 
 	s.padding = {
 		top = 5,
@@ -728,150 +656,61 @@ awful.screen.connect_for_each_screen(function(s)
 	-- 		gears.shape.rounded_rect(cr, width, height, 15)
 	-- 	end,
 	-- })
+	--
 
-	if s.index == 1 then
-		-- Tạo wibar cho laptop
-		s.mywibox = awful.wibar({
-			position = "top",
-			screen = s,
-			width = 1900,
-			height = 40,
-			bg = "#1e1e2e",
-			fg = "#cdd6f4",
-			ontop = false,
-			--[[ 	type = "dock", ]]
-			border_width = 2,
-			stretch = false,
-			shape = function(cr, width, height)
-				gears.shape.rounded_rect(cr, width, height, 15)
-			end,
-		})
+	--[[ 	if s.index == 1 then ]]
+	--[[ 	Tạo wibar cho laptop ]]
+	s.mywibox = awful.wibar({
+		position = "top",
+		screen = s,
+		width = 1900,
+		height = 40,
+		bg = "#1e1e2e",
+		fg = "#cdd6f4",
+		ontop = false,
+		--[[ 	type = "dock", ]]
+		border_width = 2,
+		stretch = false,
+		shape = function(cr, width, height)
+			gears.shape.rounded_rect(cr, width, height, 15)
+		end,
+	})
+	awful.placement.top(s.mywibox, { margins = { top = 7 } })
+	--[[ 	awful.screen.padding(s, { top = 2 }) ]]
+	--
+	edge_poll_time(s, s.mywibox, "top")
 
-		awful.placement.top(s.mywibox, { margins = { top = 7 } })
-		--[[ 	awful.screen.padding(s, { top = 2 }) ]]
-
-		-- Add widgets to the wibox
-		s.mywibox:setup({
-			layout = wibox.layout.align.horizontal,
-			{ -- Left widgets
-				layout = wibox.layout.fixed.horizontal,
-				mylauncher,
-				--[[ 	s.mytaglist, ]]
-				{
-					{
-						my_text_btn,
-						bg = "#cdd6e4",
-						shape = gears.shape.rounded_rect,
-						widget = wibox.container.background,
-					},
-					margins = 5,
-					widget = wibox.container.margin,
-				},
-				s.mytasklist,
-				{
-					layout = wibox.layout.fixed.horizontal,
-					spacing = 6,
-					-- Clock block
-					{
-						{
-							{
-								layout = wibox.layout.fixed.horizontal,
-								mytextclock,
-							},
-							bg = "#cdd6f4",
-							fg = "#1e1e2e",
-							forced_width = 200,
-							forced_height = 25,
-							shape = gears.shape.rounded_rect,
-							widget = wibox.container.background,
-						},
-						margins = 7,
-						widget = wibox.container.margin,
-					},
-					-- Layoutbox block
-					{
-						{
-							{
-								layout = wibox.layout.fixed.horizontal,
-								s.mylayoutbox,
-							},
-							bg = "#1e1e2e",
-							forced_width = 30,
-							forced_height = 20,
-							shape = gears.shape.rounded_rect,
-							widget = wibox.container.background,
-						},
-						margins = 7,
-						widget = wibox.container.margin,
-					},
-				},
-
-				-- {
-				-- 	{
-				--
-				-- 		{
-				-- 			layout = wibox.layout.fixed.horizontal,
-				-- 			firefox_button,
-				-- 			thunar_button,
-				-- 			obsidian_button,
-				-- 			libreoffice_button,
-				-- 			discord_button,
-				-- 			protonvpn_button,
-				-- 			packettracer_button,
-				-- 			anki_button,
-				-- 			wireshark_button,
-				-- 			truykich_button,
-				-- 			margin = 2,
-				-- 			widget = wibox.container.margin,
-				-- 		},
-				-- 		bg = "#cdd6e4",
-				-- 		shape = gears.shape.rounded_rect,
-				-- 		widget = wibox.container.background,
-				-- 	},
-				-- 	margins = 7,
-				-- 	widget = wibox.container.margin,
-				-- },
-				s.mypromptbox,
-			},
-			-- Middle widgets (sẽ luôn ở giữa)
+	-- Add widgets to the wibox
+	s.mywibox:setup({
+		layout = wibox.layout.align.horizontal,
+		{ -- Left widgets
+			layout = wibox.layout.fixed.horizontal,
+			mylauncher,
+			--[[ 	s.mytaglist, ]]
 			{
-				widget = wibox.container.place, -- Bọc trong place container
-				halign = "center",
-				valign = "center",
-			},
-
-			{ -- Right widgets
-				layout = wibox.layout.fixed.horizontal,
 				{
-					{
-						{
-							wibox.widget.systray(),
-							strategy = "exact", -- không scale icons
-							margins = 6,
-							widget = wibox.container.margin,
-						},
-						forced_height = 42,
-						bg = "#1e1e2e",
-						shape = function(cr, w, h)
-							gears.shape.rounded_rect(cr, w, h, 10)
-						end,
-						widget = wibox.container.background,
-					},
-					margins = 2,
-					widget = wibox.container.margin,
+					my_text_btn,
+					bg = "#cdd6e4",
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
 				},
+				margins = 5,
+				widget = wibox.container.margin,
+			},
+			s.mytasklist,
+			{
+				layout = wibox.layout.fixed.horizontal,
+				spacing = 6,
+				-- Clock block
 				{
 					{
 						{
-							volume_widget({
-								widget_type = "arc",
-							}),
-							margin = 5,
-							widget = wibox.container.margin,
+							layout = wibox.layout.fixed.horizontal,
+							mytextclock,
 						},
 						bg = "#cdd6f4",
 						fg = "#1e1e2e",
-						forced_width = 25,
+						forced_width = 200,
 						forced_height = 25,
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
@@ -879,88 +718,16 @@ awful.screen.connect_for_each_screen(function(s)
 					margins = 7,
 					widget = wibox.container.margin,
 				},
-				wibox.widget.textbox(" "),
+				-- Layoutbox block
 				{
 					{
-
 						{
-							cpu_widget({
-								width = 70,
-								step_width = 2,
-								step_spacing = 0,
-								color = "#cdd6f4",
-							}),
-							margin = 4,
-							widget = wibox.container.margin,
+							layout = wibox.layout.fixed.horizontal,
+							s.mylayoutbox,
 						},
 						bg = "#1e1e2e",
-						shape = gears.shape.rounded_rect,
-						widget = wibox.container.background,
-					},
-					margins = 7,
-					widget = wibox.container.margin,
-				},
-				wibox.widget.textbox(" "),
-				{
-					{
-						{
-							fs_widget(),
-							margin = 3,
-							widget = wibox.container.margin,
-						},
-
-						bg = "#cdd6f4",
-						fg = "#1e1e2e",
-						shape = gears.shape.rounded_rect,
-						widget = wibox.container.background,
-					},
-					margins = 7,
-					widget = wibox.container.margin,
-				},
-				wibox.widget.textbox("   "),
-				--git_c_widget({ username = "lephong88" }),
-				{
-					{
-						{
-							net_speed_widget(),
-							margin = 4,
-							widget = wibox.container.margin,
-						},
-
-						bg = "#cdd6f4",
-						fg = "#1e1e2e",
-						shape = gears.shape.rounded_rect,
-						widget = wibox.container.background,
-					},
-					margins = 7,
-					widget = wibox.container.margin,
-				},
-				{
-					{
-						{
-							battery_widget(),
-							margin = 4,
-							widget = wibox.container.margin,
-						},
-
-						bg = "#1e1e2e",
-						fg = "#ffffff",
-						shape = gears.shape.rounded_rect,
-						widget = wibox.container.background,
-					},
-					margins = 7,
-					widget = wibox.container.margin,
-				},
-				{
-					{
-						{
-							logout_popup.widget({}),
-							margin = 4,
-							widget = wibox.container.margin,
-						},
-
-						bg = "#cdd6f4",
-						fg = "#1e1e2e",
+						forced_width = 30,
+						forced_height = 20,
 						shape = gears.shape.rounded_rect,
 						widget = wibox.container.background,
 					},
@@ -968,12 +735,175 @@ awful.screen.connect_for_each_screen(function(s)
 					widget = wibox.container.margin,
 				},
 			},
-		})
-	else
-		if s.mywibar then
-			s.mywibar.visible = false
-		end
-	end
+
+			-- {
+			-- 	{
+			--
+			-- 		{
+			-- 			layout = wibox.layout.fixed.horizontal,
+			-- 			firefox_button,
+			-- 			thunar_button,
+			-- 			obsidian_button,
+			-- 			libreoffice_button,
+			-- 			discord_button,
+			-- 			protonvpn_button,
+			-- 			packettracer_button,
+			-- 			anki_button,
+			-- 			wireshark_button,
+			-- 			truykich_button,
+			-- 			margin = 2,
+			-- 			widget = wibox.container.margin,
+			-- 		},
+			-- 		bg = "#cdd6e4",
+			-- 		shape = gears.shape.rounded_rect,
+			-- 		widget = wibox.container.background,
+			-- 	},
+			-- 	margins = 7,
+			-- 	widget = wibox.container.margin,
+			-- },
+			s.mypromptbox,
+		},
+		-- Middle widgets (sẽ luôn ở giữa)
+		{
+			widget = wibox.container.place, -- Bọc trong place container
+			halign = "center",
+			valign = "center",
+		},
+
+		{ -- Right widgets
+			layout = wibox.layout.fixed.horizontal,
+			{
+				{
+					{
+						wibox.widget.systray(),
+						strategy = "exact", -- không scale icons
+						margins = 6,
+						widget = wibox.container.margin,
+					},
+					forced_height = 42,
+					bg = "#1e1e2e",
+					shape = function(cr, w, h)
+						gears.shape.rounded_rect(cr, w, h, 10)
+					end,
+					widget = wibox.container.background,
+				},
+				margins = 2,
+				widget = wibox.container.margin,
+			},
+			{
+				{
+					{
+						volume_widget({
+							widget_type = "arc",
+						}),
+						margin = 5,
+						widget = wibox.container.margin,
+					},
+					bg = "#cdd6f4",
+					fg = "#1e1e2e",
+					forced_width = 25,
+					forced_height = 25,
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
+				},
+				margins = 7,
+				widget = wibox.container.margin,
+			},
+			wibox.widget.textbox(" "),
+			{
+				{
+
+					{
+						cpu_widget({
+							width = 70,
+							step_width = 2,
+							step_spacing = 0,
+							color = "#cdd6f4",
+						}),
+						margin = 4,
+						widget = wibox.container.margin,
+					},
+					bg = "#1e1e2e",
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
+				},
+				margins = 7,
+				widget = wibox.container.margin,
+			},
+			wibox.widget.textbox(" "),
+			{
+				{
+					{
+						fs_widget(),
+						margin = 3,
+						widget = wibox.container.margin,
+					},
+
+					bg = "#cdd6f4",
+					fg = "#1e1e2e",
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
+				},
+				margins = 7,
+				widget = wibox.container.margin,
+			},
+			wibox.widget.textbox("   "),
+			--git_c_widget({ username = "lephong88" }),
+			{
+				{
+					{
+						net_speed_widget(),
+						margin = 4,
+						widget = wibox.container.margin,
+					},
+
+					bg = "#cdd6f4",
+					fg = "#1e1e2e",
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
+				},
+				margins = 7,
+				widget = wibox.container.margin,
+			},
+			{
+				{
+					{
+						battery_widget(),
+						margin = 4,
+						widget = wibox.container.margin,
+					},
+
+					bg = "#1e1e2e",
+					fg = "#ffffff",
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
+				},
+				margins = 7,
+				widget = wibox.container.margin,
+			},
+			{
+				{
+					{
+						logout_popup.widget({}),
+						margin = 4,
+						widget = wibox.container.margin,
+					},
+
+					bg = "#cdd6f4",
+					fg = "#1e1e2e",
+					shape = gears.shape.rounded_rect,
+					widget = wibox.container.background,
+				},
+				margins = 7,
+				widget = wibox.container.margin,
+			},
+		},
+	})
+	-- else
+	-- 	if s.mywibox then
+	-- 		s.mywibox.visible = false
+	-- 	end
+	-- end
 
 	-- Add widgets to the wibox
 	-- s.mywibox:setup({
@@ -1162,5 +1092,3 @@ awful.screen.connect_for_each_screen(function(s)
 		t.layout = awful.layout.suit.tile
 	end
 end)
--- Khi tag ở screen[1] thay đổi, đổi theo tag screen[2]
--- }}}

@@ -1,0 +1,37 @@
+
+@font-face {
+  font-family: "Maple Mono NF CN";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-400-normal.woff2")
+       format("woff2");
+}
+
+@font-face {
+  font-family: "Maple Mono NF CN";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-700-normal.woff2")
+       format("woff2");
+}
+@import url(https://vsthemes.org/uploads/generator/client/BasicBackground.css);
+:root {
+    --transparencycolor: 6,32,54;
+    --transparencyalpha: 0.2;
+    --messagetransparency: 0.5;
+    --guildchanneltransparency: 0.3;
+    --memberlistransparency: 0.3;
+    --accentcolor: 38,151,255;
+    --background: url("https://vsthemes.org/uploads/posts/2021-03/1616867333_anm6009.webp");
+    --backdrop: rgba(0,0,0,0.2);
+    --backgroundblur: 0px;
+    --popoutblur: 0px;
+    --backdropblur: 0px;
+    --version1_0_5:none;
+    --backgroundsize: cover;
+    --popoutsize: cover;
+    --backdropsize: cover;
+    --font-primary: "Maple Mono NF CN", "Noto Sans", sans-serif !important;
+}

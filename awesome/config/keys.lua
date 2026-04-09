@@ -17,6 +17,15 @@ local volume_widget = require("widgets.volume-widget.volume")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+-- local function view_tag_on_all_screens(i)
+-- 	for s in screen do
+-- 		local t = s.tags[i]
+-- 		if t then
+-- 			t:view_only()
+-- 		end
+-- 	end
+-- end
+
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
@@ -115,18 +124,6 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "p", function()
 		menubar.show()
 	end, { description = "show the menubar", group = "launcher" }),
-
-	--Config logout
-	awful.key({ modkey }, "l", function()
-		logout_popup.launch({
-			bg_color = "#261447",
-			accent_color = "#ff4365",
-			text_color = "#f706cf",
-			icon_size = 40,
-			icon_margin = 16,
-			phrases = { "May co tat di khong!" },
-		})
-	end, { description = "Show logout screen", group = "custom" }),
 	--Volume
 	awful.key({ modkey }, "→", function()
 		volume_widget:inc(5)
@@ -152,22 +149,6 @@ globalkeys = gears.table.join(
 	awful.key({ "Shift" }, "Print", function()
 		awful.spawn("flameshot full -p ~/Pictures")
 	end, { description = "Screen full display", group = "screenshot" }),
-	awful.key({ modkey, "Control" }, "o", function()
-		local t = awful.screen.focused().selected_tag
-		if t then
-			-- Lấy màn hình kế tiếp (vòng tròn)
-			local next_screen = awful.screen.focused():get_next_in_direction("right") or screen.primary
-			t.screen = next_screen
-			t:view_only()
-
-			-- Ẩn tag trên màn hình cũ (tùy chọn)
-			for s in screen do
-				if s ~= t.screen then
-					awful.tag.viewnone(s)
-				end
-			end
-		end
-	end, { description = "move tag to next screen", group = "tag" }),
 	-- Focus screen 1
 	awful.key({ modkey }, "F1", function()
 		awful.screen.focus(1)
