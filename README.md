@@ -1,4 +1,4 @@
-# dotfiles
+# awesomewm-dotfiles-stable
 
 My personal Linux configuration files (`~/.config` and related home dotfiles), managed for a CachyOS/Arch-based setup running **AwesomeWM**.
 
