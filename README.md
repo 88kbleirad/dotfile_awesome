@@ -5,11 +5,21 @@ My personal Linux configuration files (`~/.config` and related home dotfiles), m
 This repository includes window manager config, terminal, file manager, wallpaper/lockscreen tools, theming, and system fetch tools.
 
 ## Table of Contents
+- [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Directory Tree](#directory-tree)
 - [Included Apps](#included-apps)
 - [Tech Stack](#tech-stack)
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="demo/awesome_stable_1.jpg" alt="Desktop wallpaper and top bar" width="100%"></td>
+    <td><img src="demo/awesome_stable_2.jpg" alt="Fastfetch/Alacritty layout" width="100%"></td>
+  </tr>
+</table>
 
 ## Requirements
 - Arch-based distro (Arch Linux, CachyOS, etc.)
@@ -43,27 +53,27 @@ Step 4: Restart the relevant apps (e.g. restart AwesomeWM with `Alt + Shift + R`
 ## Directory Tree
 
 ```
-.config/
-├── .icons/
-├── .screenlayout/
-├── Pictures/
-├── Thunar/
-├── alacritty/
-├── awesome/
-├── fastfetch/
-├── gtk-3.0/
-├── icons/
-├── neofetch/
-├── nitrogen/
-├── picom/
-├── rofi/
-├── .profile
-├── .zshenv
-├── .zshrc
-├── rimuru-tempest.theme.css
-├── system24.theme.css
-├── theme.css
-└── transparent.css
+.dotfiles_awesome/
+    ├── .icons/
+    ├── .screenlayout/
+    ├── Pictures/
+    ├── Thunar/
+    ├── alacritty/
+    ├── awesome/
+    ├── fastfetch/
+    ├── gtk-3.0/
+    ├── icons/
+    ├── neofetch/
+    ├── nitrogen/
+    ├── picom/
+    ├── rofi/
+    ├── .profile
+    ├── .zshenv
+    ├── .zshrc
+    ├── rimuru-tempest.theme.css
+    ├── system24.theme.css
+    ├── theme.css
+    └── transparent.css
 ```
 
 ## Included Apps
@@ -75,7 +85,7 @@ Step 4: Restart the relevant apps (e.g. restart AwesomeWM with `Alt + Shift + R`
 | `Pictures/` | Wallpapers and images used across configs |
 | `Thunar/` | File manager configuration |
 | `alacritty/` | Terminal emulator configuration |
-| `awesome/` | AwesomeWM window manager config — see [my-awesomewm-dotfiles](https://github.com/88kbleirad/my-awesomewm-dotfiles) |
+| `awesome/` | AwesomeWM window manager config — see [dotfile-awesome](https://github.com/88kbleirad/dotfile_awesome.git) |
 | `fastfetch/` | System info fetch tool config |
 | `gtk-3.0/` | GTK3 theming settings |
 | `icons/` | Additional icon theme assets |
